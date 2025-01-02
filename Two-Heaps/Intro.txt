@@ -1,0 +1,25 @@
+
+
+- when a given set of elements needs to be divide in two parts one with small elements other with larger elements 
+- use two heaps to solve these problems
+- minHeap - to find the smallest elements 
+- maxHeap - to find the biggest element 
+
+Questions:
+
+1. Find the Median of a Number Stream (medium): 
+	https://leetcode.com/problems/find-median-from-data-stream/
+
+Solution: 
+	- push the num to maxHeap first 
+	- then pop the top from maxHeap and push to minHeap -> to shuffle correctly
+	- if the size of minHeap becomes greater than maxHeap then reshuffle
+
+2. Sliding Window Median (hard):
+	https://leetcode.com/problems/sliding-window-median/	
+
+3. Maximize Capital (hard)
+	https://leetcode.com/problems/ipo/
+
+4. Next Interval (hard)
+	https://leetcode.com/problems/find-right-interval/
