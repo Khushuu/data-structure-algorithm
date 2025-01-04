@@ -15,8 +15,8 @@
 
 // lps = lcs(s1, reverse(s1)) 
 
+// Longest Palindromic Subsequence
 //------------------------------------------------------------------------------------------------------
-// code 
 int longestPalindromicSubsequence(string s) {
 
 	// find lcs of s and reverse of s
@@ -44,3 +44,18 @@ int longestPalindromicSubsequence(string s) {
 	return dp[n][n];
 }
 //------------------------------------------------------------------------------------------------------
+
+// Minimum number of deletions in a string to make it a palindrome 
+// find the longest palindromic subsequence = lps 
+// minimum number of deletions will be subtracting lps from the length of string 
+// deletion =  to convert s to lps = s.size() - lps
+
+// e.g 
+// s = "abcddnmba" = 9
+// lps = "abddba" = 6
+// deletion = s.size() - lps = 9 - 6 = 3 = remove "cnm" from s to make it palindrome
+// since we want minimum deletion we should convert s to longest palindrome subsequence 
+
+// minimum deletion to make a given string a palindrome
+// same lps code
+return n - dp[n][n];
