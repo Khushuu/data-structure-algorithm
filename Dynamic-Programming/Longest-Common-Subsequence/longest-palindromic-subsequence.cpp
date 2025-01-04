@@ -58,4 +58,4 @@ int longestPalindromicSubsequence(string s) {
 
 // minimum deletion to make a given string a palindrome
 // same lps code
-return n - dp[n][n];
+return n - dp[n][n]; // deletion = s.size() - lps
