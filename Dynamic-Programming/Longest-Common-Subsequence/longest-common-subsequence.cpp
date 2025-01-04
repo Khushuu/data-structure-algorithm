@@ -137,3 +137,34 @@ int longestCommonSubsequence(string s1, string s2) {
 	return dp[m][n];
 }
 //-------------------------**************************************************---------------------------------------
+
+// Printing Longest Common Subsequence 
+// To print the LCS, after constructing the DP table, we trace back from the bottom-right corner of the table to the top-left corner.
+// if two chars match then move to dp[i-1][j-1] and add the char to result
+// if they don't find the max of dp[i-1][j] and dp[i][j-1] and move in its direction
+// if any of the index beecomes 0 we can stop as one of the string is empty and it can't contribute anymore
+
+// why are we doing this
+// we are just retracing our steps and finding all the chars that lead to the longest common substring 
+
+//------------------------------------------------------------------------------------------------------------------
+int i = m;
+int j = n;
+string lcs = "";
+
+while(i > 0 && j > 0) {
+
+	// check the correct index 
+	if(s1[i - 1] == s2[j - 1]) {
+		lcs = s1[i - 1] + lcs;
+		i--;
+		j--;
+	} 
+	else {
+		if(dp[i - 1][j] >= dp[i][j - 1]) i--; // move in the direction of the max value 
+		else j--;
+	}
+}
+
+return lcs;
+//-------------------------**************************************************---------------------------------------

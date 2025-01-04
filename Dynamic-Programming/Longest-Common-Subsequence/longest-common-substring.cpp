@@ -76,3 +76,32 @@ int longestCommonSubstring(string str1, string str2) {
 }
 //-------------------------**************************************************---------------------------------------
 
+// Printing Longest Common Substring 
+// we just need to identify the index of maximum value in the dp
+// we already have the length of the longest common substring 
+// once we get the endIndex we can form the substring by picking the result characters in the left direction
+
+// u can pick the endIndex of any string 
+// but be sure to then form the lcs from that string only
+// -------------------------------------------------------------------------------------------------------
+int endIndex = 0;
+int maxLength = 0;
+
+for(int i = 1; i <= m; i++) {
+	for(int j = 1; j <= n; j++) {
+		if(dp[i][j]  > maxLength) {
+			maxLength = dp[i][j];
+			endIndex = i - 1; // we r picking endIndex from s1, i - 1 is done since we iterate from 1 to m
+		}
+	}
+}
+// + 1 is done to include the startIndex correctly 
+// abcdef --> if cde is lc substring then endIndex = 4 and maxLength = 3 
+// startIndex should be 2, we get that by endIndex - maxLength + 1
+// and then pick maxLength no. of chars from string 
+return s1.substr(endIndex - maxLength + 1, maxLength);
+// -------------------------------------------------------------------------------------------------------
+
+// NOTE: this code can be easily integrated in the dp code of lc substring 
+// just add the if condition in print lcs code in place of result = max(result, dp[i][j]) in the lcs code
+
