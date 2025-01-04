@@ -38,5 +38,11 @@ for(int i = 1; i < intervals.size(); i++) {
 
 return result;
 
+Huffman Coding 
 
-
+-- optimal way to encode files with some characters 
+-- prefix codes - no two codes for a char have the same prefix 
+-- give small size code to the most frequent char 
+-- merge the least frequent chars and push their sum to a minHeap 
+-- construct a tree give 0 code when we move to left and 1 when move to right 
+-- if n chars are there - there will be n - 1 merge steps i.e u build a tree with n nodes and n-1 edges 

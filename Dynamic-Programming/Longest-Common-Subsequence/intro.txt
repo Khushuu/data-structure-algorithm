@@ -1,0 +1,19 @@
+Substring - a continuouse sequence of characters in a string is substring 
+Subsequence - a string form by picking few or none(empty string) characters from string in sequential order 
+
+Longest Common Subsequence Problems List 
+
+- Longest Common Substring
+- Print LCS
+- Shortest Common Supersequence 
+- Print SCS 
+- Minimum number of insertions and deletions a-->b 
+- Longest repeating subsequence 
+- Length of a longest subsequence of which length is a substring in b 
+- Subsequence pattern matching 
+- Count how many times a appears in subsequence of b 
+- Longest Palindromic Subsequence 
+- Longest Palindromic Substring 
+- Count of Palindromic Substring 
+- Minimum number of deletions in a substring to make it a Palindrome 
+- Minimum number of insertions in a string to make it a Palindrome 
