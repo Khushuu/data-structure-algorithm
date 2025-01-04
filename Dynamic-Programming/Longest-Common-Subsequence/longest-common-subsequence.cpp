@@ -28,16 +28,16 @@
 
 // Recusive Code 
 //------------------------------------------------------------------------------------------------------------------
-int lcs(string s1, string s2, int n, int m) {
+int lcs(string s1, string s2, int m, int n) {
 
 	// base condition
-	if(n == 0 || m == 0) return 0;
+	if(m == 0 || n == 0) return 0;
 
 	// one choice if char matches - return that
-	if(s1[n - 1] == s2[m - 1]) return 1 + lcs(s1, s2, n - 1, m - 1);
+	if(s1[m - 1] == s2[n - 1]) return 1 + lcs(s1, s2, m - 1, n - 1);
 
 	// two choices if end char do not match - choose the one that returns longest subsequence 
-	return max(lcs(s1, s2, n - 1, m), lcs(s1, s2, n, m - 1));
+	return max(lcs(s1, s2, m - 1, n), lcs(s1, s2, m, n - 1));
 }
 
 // caller method
@@ -59,10 +59,10 @@ int longestCommonSubsequence(string s1, string s2) {
 // how to determine what size of table to choose??
 
 // the memoized table will always be built based on the parameters whose value changes in the recursive code
-// in each call of LCS we reduce the size of n and m variables 
-// hence memoization will have a dp matrix of size (n + 1) * (m + 1)
-// why n + 1 and m + 1 ==> since the largest result it can store is the original strings of size n and m 
-// and as table is 0-index to store result of n and m we need table of size (n + 1) * (m + 1)
+// in each call of LCS we reduce the size of m and n variables 
+// hence memoization will have a dp matrix of size (m + 1) * (n + 1)
+// why m + 1 and n + 1 ==> since the largest result it can store is the original strings of size m and n 
+// and as table is 0-index to store result of m and n we need table of size (m + 1) * (n + 1)
 
 // how to deduce if the function call has been evaluated previously??
 
@@ -73,31 +73,31 @@ int longestCommonSubsequence(string s1, string s2) {
 
 
 // what would be the result??
-// the problem wants lcs for original strings of size n and m hence result will be dp[n][m]
+// the problem wants lcs for original strings of size m and n hence result will be dp[m][n]
 
 //------------------------------------------------------------------------------------------------------------------
-int lcs(string s1, string s2, int n, int m, vector<vector<int>>& dp) {
+int lcs(string s1, string s2, int m, int n, vector<vector<int>>& dp) {
 
 	// base condition
-	if(n == 0 || m == 0) return 0;
+	if(m == 0 || n == 0) return 0;
 
 	// check if result stored in memory after base condition
-	if(dp[n][m] != -1) return dp[n][m];
+	if(dp[m][n] != -1) return dp[m][n];
 
 	// one choice if char matches - return that
-	if(s1[n - 1] == s2[m - 1]) return dp[n][m] = 1 + lcs(s1, s2, n - 1, m - 1);
+	if(s1[m - 1] == s2[n - 1]) return dp[m][n] = 1 + lcs(s1, s2, m - 1, n - 1);
 
 	// two choices if end char do not match - choose the one that returns longest subsequence 
-	return dp[n][m] = max(lcs(s1, s2, n - 1, m), lcs(s1, s2, n, m - 1));
+	return dp[m][n] = max(lcs(s1, s2, m - 1, n), lcs(s1, s2, m, n - 1));
 }
 
 // caller method
 int longestCommonSubsequence(string s1, string s2) {
 
-	int n = s1.size();
-	int m = s2.size();
+	int m = s1.size();
+	int n = s2.size();
 	// memoization matrix
-	vector<vector<int>> dp(n + 1, vector<int>(m + 1, -1));
+	vector<vector<int>> dp(m + 1, vector<int>(n + 1, -1));
 
     return lcs(s1, s2, s1.size(), s2.size(), dp);
 }
@@ -115,17 +115,17 @@ int longestCommonSubsequence(string s1, string s2) {
 //------------------------------------------------------------------------------------------------------------------
 int longestCommonSubsequence(string s1, string s2) {
 
-	int n = s1.size();
-	int m = s2.size();
-	vector<vector<int>>  dp(n + 1, vector<int>(m + 1, 0));
+	int m = s1.size();
+	int n = s2.size();
+	vector<vector<int>>  dp(m + 1, vector<int>(n + 1, 0));
 
 	// we r filling the table after initialization
-	for(int i = 1; i <= n; i++) {
-		for(int j = 1; j <= m; j++) {
+	for(int i = 1; i <= m; i++) {
+		for(int j = 1; j <= n; j++) {
 
-			// the reason y we do i - 1 is although the index should be from 0 to n-1 
-			// since we loop over the table from 1 to n in order to correctly pick the CURRENT CHAR
-			// we should do i - 1 --> so i goes from 1 to n and chars of s goes grom 0 to n - 1
+			// the reason y we do i - 1 is although the index should be from 0 to m-1 
+			// since we loop over the table from 1 to m in order to correctly pick the CURRENT CHAR
+			// we should do i - 1 --> so i goes from 1 to m and chars of s goes grom 0 to m - 1
 			// if current char match we do 1 + and look at previous answer of i-1 and j-1
 			if(s1[i - 1] == s2[j - 1])
 				dp[i][j] = 1 + dp[i - 1][j - 1];
@@ -134,8 +134,6 @@ int longestCommonSubsequence(string s1, string s2) {
 		}
 	}
 
-	return dp[n][m];
+	return dp[m][n];
 }
-
-
 //-------------------------**************************************************---------------------------------------
