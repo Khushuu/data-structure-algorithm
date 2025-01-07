@@ -9,6 +9,11 @@
 // so find lcs of s with s and do not pick the chars which match at the same index 
 // i.e if(s1[i - 1] == s2[j - 1] && i != j) only then include the subsequence 
 
+//CODE
+// find the length of longest subsequence that is repeated multiple times 
+// T.C = O(n*n)
+// S.C = O(n*n)
+//---------------------------------------------------------------------------------------------------------------
 int longestRepeatingSubsequence(string s) {
 
 	// find lcs of s and s with condition i != j
@@ -27,3 +32,4 @@ int longestRepeatingSubsequence(string s) {
 
 	return dp[n][n];
 }
+//---------------------------------------------------------------------------------------------------------------
