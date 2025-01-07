@@ -161,8 +161,8 @@ while(i > 0 && j > 0) {
 		j--;
 	} 
 	else {
-		if(dp[i - 1][j] >= dp[i][j - 1]) i--; // move in the direction of the max value 
-		else j--;
+		if(dp[i][j - 1] >= dp[i - 1][j]) j--; // move in the direction of the max value - move left
+		else i--; // move up
 	}
 }
 
