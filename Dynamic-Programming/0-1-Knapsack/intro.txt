@@ -1,0 +1,8 @@
+Problems List 
+
+- Subset sum
+- Equal sum partition
+- Count of subset sum 
+- Minimum subset sum difference
+- Target sum 
+- Number of subset with a given difference 
