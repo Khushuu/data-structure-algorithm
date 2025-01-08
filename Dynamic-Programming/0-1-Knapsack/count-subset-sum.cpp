@@ -66,22 +66,25 @@ int countSubsetSum(vector<int>& nums, int n, int targetSum, vector<vector<int>>&
 // T.C = O(n*targetSum)
 // S.C = O(n*targetSum)
 //------------------------------------------------------------------------------------------------
-int countSubsetSum(vector<int>& nums, int targetSum) {
 
+int countSubsetSum(vector<int>& nums, int targetSum) {
     int n = nums.size();
     vector<vector<int>> dp(n + 1, vector<int>(targetSum + 1, 0));
 
-    // Base case: targetSum = 0 is always true - u can select empty set
+    // Base case: targetSum = 0 can always be achieved with the empty set
     for (int i = 0; i <= n; i++) dp[i][0] = 1;
 
     for (int i = 1; i <= n; i++) {
-        for (int j = 1; j <= targetSum; j++) {
+        for (int j = 0; j <= targetSum; j++) {  // Start j from 0 for completeness - in case 0 also exist
 
-			// exclude the num
-            if (nums[i - 1] > j) 
-                dp[i][j] = dp[i - 1][j];
-            else  // incldue or exclude
-                dp[i][j] = dp[i - 1][j - nums[i - 1]] + dp[i - 1][j];
+            // Exclude the current number if it is greater than sum
+			if(nums[i - 1] > j)
+            	dp[i][j] = dp[i - 1][j];
+
+            // Include the current number if it's less than or equal to the target
+            if (nums[i - 1] <= j) {
+                dp[i][j] += dp[i - 1][j - nums[i - 1]];
+            }
         }
     }
 
