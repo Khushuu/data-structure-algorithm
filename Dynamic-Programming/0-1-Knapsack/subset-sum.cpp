@@ -80,7 +80,7 @@ bool subsetSum(vector<int>& nums, int targetSum) {
             if (nums[i - 1] > j) 
                 dp[i][j] = dp[i - 1][j];
             else  // incldue or exclude
-                dp[i][j] = dp[i - 1][j] || dp[i - 1][j - nums[i - 1]];
+                dp[i][j] = dp[i - 1][j - nums[i - 1]] || dp[i - 1][j];
         }
     }
 
