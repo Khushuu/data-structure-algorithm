@@ -27,6 +27,8 @@
 // choosing the maximum of these two 
 
 // Recusive Code 
+// T.C = O(2^(m + n))
+// S.C = O(m + n)
 //------------------------------------------------------------------------------------------------------------------
 int lcs(string s1, string s2, int m, int n) {
 
@@ -75,6 +77,8 @@ int longestCommonSubsequence(string s1, string s2) {
 // what would be the result??
 // the problem wants lcs for original strings of size m and n hence result will be dp[m][n]
 
+// T.C = O(m * n)
+// S.C = O(m * n)
 //------------------------------------------------------------------------------------------------------------------
 int lcs(string s1, string s2, int m, int n, vector<vector<int>>& dp) {
 
