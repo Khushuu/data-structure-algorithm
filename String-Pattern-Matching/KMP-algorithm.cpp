@@ -13,7 +13,7 @@
 // i = 5 and j = 5 -- 'i' != 's'
 // instead of resetting j to 0
 // just check for the string "onion" i.e 1 char before current j value
-// what is the length of the longest prefix that is also a suffix 
+// what is the length of the longest proper prefix that is also a suffix 
 // so in onion for j = 4 lps array will have lps[4] = 2
 // which means that the longest string which is a prefix as well as suffix in onion is of length 2
 // "on" is both a suffix and a prefix
@@ -22,8 +22,8 @@
 // so j = 2 is compared with i = 5 now
 
 // LPS for pattern: "onions"
-// LPS: [0,0,0,1,2,0] - for onio -> longest prefix that is also a suffix is o = 1
-// for onion --> longest prefix that is also a suffix is on -> 2
+// LPS: [0,0,0,1,2,0] - for onio -> longest proper prefix that is also a suffix is o = 1
+// for onion --> longest proper prefix that is also a suffix is on -> 2
 
 //  if (text[i] == pattern[j]) { i++; j++; } when the text and pattern character matches
 // else { if (j != 0) j = lps[j - 1]; else i++; } if j is not the first char check the lps table
@@ -35,6 +35,8 @@
 // S.C = O(m)- array of size m for storing lps
 //---------------------------------------------------------------------------------------------------------------
 // Function to compute the LPS array
+// NOTE: LPS: longest proper prefix that is also a suffix
+// Proper prefix: A prefix of a string that is not the entire string itself
 void computeLPSArray(string pattern, vector<int>& lps) {
     int m = pattern.length();
     int len = 0; // length of the longest substring till i that is a prefix and a suffix
