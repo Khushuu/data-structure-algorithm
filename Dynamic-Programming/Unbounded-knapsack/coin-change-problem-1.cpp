@@ -5,6 +5,7 @@
 // NOTE: Each coin can be used an unlimited number of times
 
 // this is an unbounded knapsack problem 
+// as total no. of ways is asked do the sum of all possible ways to obtain the sum
 
 // recursive CODE
 // T.C = O(2^n) - two choices made for every call - n no. of coins
@@ -17,7 +18,7 @@ int coinChangeRecursive(vector<int>& coins, int n, int sum) {
 
     // Base cases
     if (sum == 0) return 1; // 1 way to make sum 0: use no coins
-    if (n == 0 ) return 0; // No way to make the sum with no coins 
+    if (n == 0) return 0; // No way to make the sum with no coins 
 
 	// exclude if coin value more than the sum
 	if(coins[n - 1] > sum) return coinChangeRecursive(coins, n - 1, sum);
