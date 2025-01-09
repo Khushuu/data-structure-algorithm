@@ -1,0 +1,15 @@
+Unbounded knapsack
+
+difference between 0-1 knapsack and unbounded knapsack
+
+- in 0-1 knapsack u can pick each item only once - i u want to - u pick it 0 times(exclude) or 1 time(include)
+- in unbounded knapsack same item can be picked multiple times - u pick it 0 times(exclude) or multiple times(include)
+
+- if excluded don't process it again 
+- if included don't move on to next item - process this item again 
+
+problems
+
+-- rod cutting problem 
+-- coin change problem - 1
+-- coin change problem - 2
