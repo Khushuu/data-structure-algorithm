@@ -33,7 +33,7 @@
 // hence find targetSum = (totalSum + diff) / 2
 
 
-// CODE
+// Bottom up CODE
 // T.C = O(n*targetSum)
 // S.C = O(n*targetSum)
 //-------------------------------------------------------------------------------------------
