@@ -31,6 +31,8 @@
 // Does not work with graphs containing negative weight edges (use Bellman-Ford instead)
 // Not ideal for unweighted graphs (use BFS for shortest path)
 
+// T.C = O((V + E).logV)
+// S.C = O(V + E) with adjacency list
 
 const int INF = numeric_limits<int>::max();
 
