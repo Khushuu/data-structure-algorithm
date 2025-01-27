@@ -1,0 +1,26 @@
+Matrix Chain Multiplication (MCM)
+
+-- this format is used when an array or a string has to be partitioned some way to get an optimal solution
+-- partition can be done for each index between a certain range i to j
+-- calculate the temporary result for each part i to k and k + 1 to j
+-- use this temporary result to deduce the final result 
+-- return the final result at the end 
+
+-- in the first call to solve -> i will probably on the left end and j will probably be on the right end 
+
+// basic format of MCM
+int solve(int a[], int i, int j) {
+
+	// base condition
+	if(i > j) return 0;
+
+	// this loop start and end condition or increment condition can vary
+	for(int k = i; k < j; k++) {
+		
+		// the operator can vary 
+		int temp = solve(a, i, k) + solve(a, k + 1, j);
+		result = function(result, temp); // can be max min, addition or any other operation 
+	}
+
+	return result;
+}

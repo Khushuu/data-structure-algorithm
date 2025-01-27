@@ -1,3 +1,5 @@
+// SHORTEST PATH ALGORITHM
+
 // given a weighted graph (directed / undirected)
 // and a source node
 // find shortest path from source node to every other node
@@ -30,6 +32,12 @@
 // Limitations:
 // Does not work with graphs containing negative weight edges (use Bellman-Ford instead)
 // Not ideal for unweighted graphs (use BFS for shortest path)
+
+// Dijkstra's algorithm doesn't work with negative weight edges because it assumes that once a node's shortest distance is finalized (processed), it will never be updated. This assumption is violated when negative weight edges exist.
+
+D// ijkstra's Limitation: It assumes that once a node's shortest distance is finalized, it will not change.
+//Negative Weight Edges: Violate this assumption as a shorter path might appear after finalizing a node.
+// Alternative: Use the Bellman-Ford Algorithm for graphs with negative weight edges.
 
 // T.C = O((V + E).logV)
 // S.C = O(V + E) with adjacency list
