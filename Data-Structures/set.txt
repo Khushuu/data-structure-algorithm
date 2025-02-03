@@ -1,0 +1,52 @@
+1. set (Ordered Set)
+
+-- Implemented as a Balanced Binary Search Tree (BST), usually a Red-Black Tree.
+-- Elements are stored in sorted order.
+-- Provides logarithmic time complexity for operations.
+
+Operations & Time Complexity
+
+Insertion (insert(x)) -  O(logN) -	Insertion follows BST rules and maintains balancing.
+Deletion (erase(x))	-    O(logN) - Deletion also maintains the balanced tree structure.
+Search (find(x))	-    O(logN) - Uses binary search on the tree structure.
+Traversal (for-each loop)	- O(N)	- Elements are accessed in sorted order.
+Lower/Upper Bound (lower_bound(x), upper_bound(x))	- O(logN) - Finds the first element ≥ or > x.
+
+Advantages of set
+✅ Elements remain sorted.
+✅ Efficient ordered operations like lower_bound() and upper_bound().
+✅ Guaranteed logarithmic performance for all operations.
+
+Disadvantages
+❌ Slower than unordered_set for insertions and lookups.
+❌ Cannot access elements by index directly (no random access).
+
+
+2. unordered_set (Hash Set)
+
+Implementation
+
+- Implemented as a Hash Table.
+- Elements are stored in no particular order.
+- Uses buckets and a hash function for indexing.
+- Average time complexity for operations is constant 
+
+Operations & Time Complexity
+
+Insertion (insert(x))	- O(1) (Avg),  O(N) (Worst)	- Uses a hash function to place elements in buckets.
+Deletion (erase(x))	- O(1) (Avg), O(N) (Worst) - 	Finds element by hash and removes it.
+Search (find(x))	- O(1) (Avg), O(N) (Worst) - Looks up element in the hash table.
+Traversal (for-each loop)	- O(N)	- Elements are stored in an arbitrary order.
+Rehashing (when the table grows)	- O(N)	- Happens when load factor exceeds a threshold.
+
+
+Advantages of unordered_set
+✅ Faster insertions, deletions, and lookups in average cases (O(1)).
+✅ Best choice when order does not matter.
+✅ More efficient than set for large datasets with frequent lookups.
+
+Disadvantages
+❌ Worst-case complexity is O(N) (due to hash collisions).
+❌ Elements are unordered, making ordered operations impossible.
+❌ Extra memory is used for hashing and storing buckets.
+

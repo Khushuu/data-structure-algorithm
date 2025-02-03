@@ -50,6 +50,8 @@ int minCuts(string& s, int i, int j) {
 // check memo before base condition - this is done so that we don't have to check palindrom string 
 // even when the result is already stored 
 
+// (Memoization) – O(n^3) Time and O(n^2) Space
+
 int minCuts(string& s, int i, int j, 
                         vector<vector<int>>& memo) {
       
