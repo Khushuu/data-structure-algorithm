@@ -1,0 +1,76 @@
+Backtracking - controlled recusion + pass by reference
+Recusion - choices + decisions
+Based on recusion
+--> DP
+--> Backtracking
+--> Divide and Conquer 
+
+Pass by value to a function - creates another copy in memory for the passed argument
+Pass by reference to a function - refers to the original argument in memory
+
+controlled recusion -> don't make the choices that are not valid and will not lead to result
+
+Backtracking problems are the ones where we pass by reference 
+In functions where pass by value is done there is no need to backtrack as a shallow copy is created 
+Pass by value will anyhow not change the original value 
+
+Identification of Backtracking 
+
+	-- Choices + decision 
+	-- all combinations
+	-- controlled recursion
+	-- number of choices - much for backtracking problems - run for loop to select each choice
+	-- size of constriaint - usually between 1 to 10 --> exponential time complexity that's y
+	-- don't be greedy
+
+CONSTRAINTS
+
+check what is the range on int in terms of power of 10
+CPU power of coding platforms - 10^8 operations per second
+number of operations <= number of seconds (given or take default 1) * 10^8
+
+Generalization of backtracking 
+
+-- child of recursion 
+-- number of choices is large
+-- it is controlled recursion
+-- pass by reference 
+
+-- the return type is usually void for the backtracking function 
+-- add base condition to stop further calls - mostly a helper function to check if parameters are valid or not 
+-- update the result if the solution is found in the base condition and return 
+-- run a for loop for all possible choices that call backtracking function for each choice 
+-- before calling backtrack function just check if the choice is valid or not - CONTROLLED RECURSION 
+
+// template of backtracking 
+
+void backtrack(&variable, &result) {
+
+	if(isSolved()) {
+		add to result 
+		return 
+	}
+
+	for(c in all choices) {
+
+		if(!valid(c)) continue 
+		do changes in variable // eg. variable += c
+		backtrack(variable) // or some other way to add choices to variable 
+		revert changes done to variable // e.g variable -= c ==> backtracking 
+	}
+}
+
+
+Questions - 10 questions
+
+-- Permutations of a string 
+-- Largest number in kth swap 
+-- N digits - no. of digits in increasing order 
+-- Rat in maze 
+-- Word break 
+-- Palindrome partitioning
+-- Combination Sum 
+-- Sudoku 
+-- N Queens 
+-- Phone letter digits
+
