@@ -60,6 +60,11 @@ void backtrack(&variable, &result) {
 	}
 }
 
+Time complexity of recrusive trees
+
+Total workdone = workdone in 1 node * no. of nodes
+			== O(1) * 2^n = O(2^n)
+Workdone in 1 node = all the operations done inside the recursive method 
 
 Questions - 10 questions
 
@@ -73,4 +78,5 @@ Questions - 10 questions
 -- Sudoku 
 -- N Queens 
 -- Phone letter digits
+
 
