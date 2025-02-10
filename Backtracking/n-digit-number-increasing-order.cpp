@@ -20,6 +20,7 @@
 // stoi(num) to convert and store → O(n)
 // Since we generate C(9, n) numbers, the total work done is: O(n)×C(9,n)
 
+// time complexity would have been 9^n if all combinations were asked and not just increasing 
 // --------------------------------------------------------------------------------------------------------------
 
 void generateNumbers(int n, int start, string &num, vector<int> &result) {
