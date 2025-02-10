@@ -7,6 +7,17 @@
 // s = ABC ==> permutation = 3! / (1! * 1! * 1!) = 6 (ABC, ACB, BAC, BCA, CAB, CBA)
 // s = AAB ==> permutation = 3! / (2! * 1!) = 6 / 2 = 3 (AAB, ABA, BAA)
 
+// the reason y we skip duplicates is because the leaf nodes will have the same set of values for duplicates
+// s = abcc 
+// swap(0, 2) ==> cbac
+// swap(0, 3) ==> cbca 
+// in both positions c is fixed at start and all the final leaf node values for cbac and cbca will match 
+// lets check 
+// final leaf for cbac ==> cbac, cbca, cabc, cacb, ccab, ccba
+// final leaf for cbca ==> cbca, cbac, ccba, ccab, cabc, cacb
+// if u check both have the same values 
+
+
 // recursive solution 
 // pass by value - generate new input output string for each call
 // to pick only unique permutation - use a seen set to avoid creating the same recursive tree branch as before 
@@ -117,7 +128,7 @@ vector<string> getUniquePermutations(string &str) {
 // ---------------------------------------------------------------------------------------------------------------
 
 void permuteUnique(string &s, int index, vector<string> &result) {
-	
+
     if (index == s.size() - 1) {
         result.push_back(s);
         return;
@@ -139,6 +150,36 @@ vector<string> getUniquePermutations(string &str) {
     permuteUnique(str, 0, result);
     return result;
 }
+
+// ---------------------------------------------------------------------------------------------------------------
+
+// leetcode problem - permutations of number 
+// all integers in the array are distinct
+// return all possible permutations
+
+// ---------------------------------------------------------------------------------------------------------------
+
+ 	void solve(int index, vector<int>& nums, vector<vector<int>>& result) {
+
+        if(index == nums.size() - 1) {
+            result.push_back(nums);
+            return;
+        }
+
+        for(int i = index; i < nums.size(); i++) {
+            swap(nums[i], nums[index]);
+            solve(index + 1, nums, result);
+            swap(nums[i], nums[index]);
+        }
+    }
+
+    vector<vector<int>> permute(vector<int>& nums) {
+        
+        vector<vector<int>> result;
+        solve(0, nums, result);
+
+        return result;
+    }
 
 // ---------------------------------------------------------------------------------------------------------------
 
