@@ -15,6 +15,8 @@
 // The number of possible partitions is O(2^n), as each character can be part of a partition in 2 ways (either starts a new partition or extends a previous one).
 // forming of sentence = O(n)
 
+// S.C = Space complexity: O(2^n)
+
 // -------------------------------------------------------------------------------------------------------
 
 class Solution {
@@ -62,6 +64,55 @@ public:
         partition(0, s, words, result, dict);
 
         return result;
+    }
+};
+
+// --------------------------------------------------------------------------------------------------------
+
+// Memoized solution 
+// same time and space complexity
+// ✅ Backtracking generates all possible partitions.
+// ✅ Memoization avoids redundant calculations.
+// ✅ Time Complexity: O(n * 2^n).
+// ✅ Space Complexity: O(n * 2^n + m).
+
+// --------------------------------------------------------------------------------------------------------
+
+class Solution {
+private:
+    unordered_map<int, vector<string>> memo; // Memoization map
+
+    vector<string> partition(int start, string &s, unordered_set<string> &dict) {
+        // If result for this start index is already computed, return memoized result
+        if (memo.count(start)) return memo[start]; 
+
+        // Base case: If start reaches the end of the string, return an empty string
+        if (start == s.size()) return {""}; 
+
+        vector<string> result;
+
+        // Try every possible end index for substring s[start:end]
+        for (int end = start; end < s.size(); end++) {
+            string word = s.substr(start, end - start + 1); // Extract substring
+            
+            if (dict.find(word) != dict.end()) { // Check if it exists in wordDict
+                vector<string> suffixWays = partition(end + 1, s, dict); // Recursive call
+                
+                // Construct sentences from current word + all suffix ways
+                for (string suffix : suffixWays) {
+                    result.push_back(word + (suffix.empty() ? "" : " " + suffix));
+                }
+            }
+        }
+
+        // Memoize result for current start index
+        return memo[start] = result;
+    }
+
+public:
+    vector<string> wordBreak(string s, vector<string>& wordDict) {
+        unordered_set<string> dict(wordDict.begin(), wordDict.end()); // Convert to unordered_set for O(1) lookup
+        return partition(0, s, dict);
     }
 };
 
