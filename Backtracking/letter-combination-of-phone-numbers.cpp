@@ -35,39 +35,39 @@
 // S.C = O(4^n * n)
 // Each string is stored in result, taking O(4^n × n) space.
 // -----------------------------------------------------------------------------------------------------------
-
 class Solution {
 private:
-
     unordered_map<char, string> phoneMap = {
         {'2', "abc"}, {'3', "def"}, {'4', "ghi"},
         {'5', "jkl"}, {'6', "mno"}, {'7', "pqrs"},
         {'8', "tuv"}, {'9', "wxyz"}
     };
 
-    void backtrack(int index, string &digits, string &path, string &result) {
-        if (index == digits.size()) {  // Base case: all digits processed
+    void backtrack(int index, string &digits, string &path, vector<string>& result) {
+
+        if(index == digits.size()) {
             result.push_back(path);
             return;
         }
 
-        string letters = phoneMap[digits[index]];  // Get possible letters
-
-        for (char letter : letters) {
-            path.push_back(letter);      // Choose
-            backtrack(index + 1, digits, path, result); // Explore next digit
-            path.pop_back();             // Undo choice (Backtrack)
+        // loop over possible chars for the digits present at index --> index 
+        for(char c: phoneMap[digits[index]]) {
+            path.push_back(c);
+            backtrack(index + 1, digits, path, result);
+            path.pop_back();
         }
     }
 
 public:
     vector<string> letterCombinations(string digits) {
-        if (digits.empty()) return {};  // Edge case: empty input
+        
+        if(digits.empty()) return {};
+
         vector<string> result;
-    	string path;
+        string path = "";
         backtrack(0, digits, path, result);
+
         return result;
     }
 };
-
 // -----------------------------------------------------------------------------------------------------------
