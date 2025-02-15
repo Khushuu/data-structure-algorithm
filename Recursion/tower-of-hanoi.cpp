@@ -42,6 +42,8 @@
 // Exponential Time Complexity O(2^n) since each recursive call creates two more calls.
 
 // Space Complexity: O(n) due to recursive function call stack.
+
+// NOTE: Since Tower of Hanoi inherently requires O(2^n) moves, there's no faster approach.
 // ----------------------------------------------------------------------------------------
 void towerOfHanoi(int n, char A, char C, char B) {
 
@@ -50,9 +52,13 @@ void towerOfHanoi(int n, char A, char C, char B) {
 		return;
 	}
 
-	towerOfHanoi(n - 1, A, B, C);
+	// this n - 1 is done because we want to move the nth last disk from A to C using B
+	towerOfHanoi(n - 1, A, B, C); 
 	cout << "Move disk " << n << " from " << A << " to " << C << endl;
-	towerOfHanoi(n - 1, B, C, A);
+
+	// recalling the same function for n - 1 disks
+	// this n - 1 is done because we now have (n - 1) disks left which need to be moved from B to C using A
+	towerOfHanoi(n - 1, B, C, A); 
 }
 // ----------------------------------------------------------------------------------------
 
