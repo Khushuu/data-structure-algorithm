@@ -1,0 +1,81 @@
+-- Different methods of graph representation 
+
+--------------------------------------------------------------------------------------------------------------
+1️⃣ Adjacency Matrix
+
+An N × N matrix where matrix[i][j] is 1 (or weight) if there is an edge from node i to node j, otherwise it's 0.
+
+#define N 4  // Number of vertices
+
+int adjMatrix[N][N] = { {0, 1, 0, 1},
+						{1, 0, 1, 1},
+						{0, 1, 0, 1},
+						{1, 1, 1, 0} };
+
+Add Edge	: 	O(1)
+Remove Edge	:	O(1)
+Check Edge Exists:	O(1)
+Space Complexity:	O(N²)
+
+Best for: Dense graphs (many edges).
+🔹 Not good for: Large sparse graphs (wastes space).
+--------------------------------------------------------------------------------------------------------------
+
+2️⃣ Adjacency List
+
+Each vertex stores a list of adjacent vertices (using vectors, linked lists, or maps).
+
+int N = 4; // Number of nodes
+vector<int> adjList[N];
+
+// Adding edges (undirected graph)
+adjList[0] = {1, 3};
+adjList[1] = {0, 2, 3};
+adjList[2] = {1, 3};
+adjList[3] = {0, 1, 2};
+
+Add Edge	: O(1)
+Remove Edge	: O(degree of node)
+Check Edge Exists:	O(degree of node)
+Space Complexity:	O(N + E)
+
+🔹 Best for: Sparse graphs (saves space).
+🔹 Not good for: Fully connected graphs (slightly slower edge lookup than matrix).
+--------------------------------------------------------------------------------------------------------------
+
+3️⃣ Edge List
+
+Stores a list of edges as pairs (u, v), where u and v are vertices.
+
+vector<pair<int, int>> edgeList = {{0, 1}, {0, 3}, {1, 2}, {1, 3}, {2, 3}};
+
+Add Edge	O(1)
+Remove Edge	O(E)
+Check Edge Exists	O(E)
+Space Complexity	O(E)
+
+🔹 Best for: Storing edges explicitly (useful in Kruskal’s Algorithm).
+🔹 Not good for: Frequent edge lookups.
+--------------------------------------------------------------------------------------------------------------
+
+4️⃣ Adjacency Map (Using HashMap)
+
+A unordered_map (hash table) is used to store adjacency lists dynamically.
+
+unordered_map<int, vector<int>> graph;
+
+// Adding edges
+graph[0] = {1, 3};
+graph[1] = {0, 2, 3};
+graph[2] = {1, 3};
+graph[3] = {0, 1, 2};
+
+Add Edge:	O(1)
+Remove Edge:	O(degree of node)
+Check Edge Exists: 	O(degree of node)
+Space Complexity:	O(N + E)
+
+🔹 Best for: Dynamic graphs where nodes can be added/removed.
+🔹 Not good for: Dense graphs with many nodes.
+
+--------------------------------------------------------------------------------------------------------------
