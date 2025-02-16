@@ -4,6 +4,8 @@ Connected Components: Undirected Graph
 Strongly Connected Components: Directed Graph
 DFS/BFS are efficient for O(N + E) solution.
 
+Union-Find (Best for Large Graphs)
+
 -------------------------------------------------------------------------------------------------------------
 1️⃣ Connected Components (Undirected Graph)
 
