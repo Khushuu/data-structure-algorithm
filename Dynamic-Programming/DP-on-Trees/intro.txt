@@ -10,11 +10,14 @@
 
 -- temp --> the answer that we will return to main call 
 -- ans --> the answer that will include the current node as the decisive one 
--- result --> deduce the result using ans 
+-- result --> deduce the result using ans and temp 
 -- return temp to the main call 
 
+-- NOTE: at each point u have to update the result with the maximum of two options or the result itself 
+-- i.e either contribute to the answer or become the answer 
 
 -- Questions
 -- diameter of binary tree 
 -- maximum path sum - from any node to any node 
 -- maximum path sum - from leaf node to leaf node 
+

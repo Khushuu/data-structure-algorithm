@@ -49,3 +49,27 @@ int diameter(TreeNode* node, int& result) {
 }
 // -------------------------------------------------------------------------------------------------------
 
+// NOTE: in this case the temp, ans logic won't work directly 
+// for calculating temp we add 1 to max(left, right) --> but this should only be done if there is a calling function
+// if there is no one to call this function adding an extra node will not work and give incorrect result 
+
+// modify the logic to add 1 when returning to the temp
+// -------------------------------------------------------------------------------------------------------
+
+int diameter(TreeNode* node, int& result) {
+
+	if(node == nullptr) return 0;
+
+	int left = diameter(node->left, result);
+	int right = diameter(node->right, result);
+
+	int ans = left + right; // become the answer
+	int temp = max(left, right); // contribute to the answer 
+
+	// deduce result using max of temp, ans and result
+	result = max({result, temp, ans});
+
+	return 1 + temp;
+}
+
+// -------------------------------------------------------------------------------------------------------
