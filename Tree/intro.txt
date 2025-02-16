@@ -1,0 +1,5 @@
+Tree: a graph is a tree if it has n nodes and n - 1 edges and single connected component 
+
+n node and n - 1 edges ensure that there is no cycle in the graph
+single connected component ensures that each node can be reached 
+
