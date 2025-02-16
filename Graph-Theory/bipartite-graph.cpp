@@ -24,7 +24,7 @@
 
 // Leetcode problems
 // 785. Is Graph Bipartite? 
-// 886. Possible Bipartition
+// 886. Possible Bipartition --> nodes from 1 to n so create color of size n + 1, convert dislikes - edges to graph adjacency list --> check for each connected component by looping from 1 to n
 
 // NOTE
 // we are not using any visited array
