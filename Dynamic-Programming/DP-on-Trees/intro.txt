@@ -1,0 +1,20 @@
+-- since in recursion we always have option of choices and decisions
+-- in tree also we have some choices and on the basis of that we make decisions 
+
+-- suppose in problem: diameter of a tree 
+-- any root has two choices 
+-- either it becomes the subtree that contributes to the diameter 
+-- or it becomes a left or right arm of any other node 
+-- we deduce the max result by considering if the node became the main diameter 
+-- and we return the value when it doesn't 
+
+-- temp --> the answer that we will return to main call 
+-- ans --> the answer that will include the current node as the decisive one 
+-- result --> deduce the result using ans 
+-- return temp to the main call 
+
+
+-- Questions
+-- diameter of binary tree 
+-- maximum path sum - from any node to any node 
+-- maximum path sum - from leaf node to leaf node 
