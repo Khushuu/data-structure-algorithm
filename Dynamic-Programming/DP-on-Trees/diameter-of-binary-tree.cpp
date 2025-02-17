@@ -54,6 +54,7 @@ int diameter(TreeNode* node, int& result) {
 // if there is no one to call this function adding an extra node will not work and give incorrect result 
 
 // modify the logic to add 1 when returning to the temp
+// NOT ADVISED
 // -------------------------------------------------------------------------------------------------------
 
 int diameter(TreeNode* node, int& result) {
