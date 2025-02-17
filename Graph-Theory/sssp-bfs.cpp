@@ -10,6 +10,9 @@
 // Process each node, updating the shortest distance for its neighbors if not visited before.
 // Continue BFS until all reachable nodes are visited.
 
+// bfs as it traverse all connected edges at once 
+// bfs will always result into shortest path
+
 // instead of using a visited array use distance array 
 // if distance for a node is -1 that means it is not visited yet
 // return a distance array denoting the shortest distance of all nodes from start node 
@@ -51,6 +54,34 @@ void bfs(int start, vector<vector<int>> &graph, vector<int> &distance) {
         }
     }
 }
+
+//-----------------------------------------------------------------------------------------------------
+
+// bfs using visited array 
+void bfs(int start, vector<vector<int>> &graph, vector<bool> &visited, vector<int> &distance) {
+
+    queue<int> q;
+    q.push(start);
+    distance[start] = 0;  // Distance of start node from itself is 0
+	visited[start] = true; // mark start node as visited
+
+    while (!q.empty()) {
+
+        int node = q.front();
+        q.pop();
+
+        for (int neighbor : graph[node]) {
+
+            if (!visted[neighbor]) {  // If not visited
+                distance[neighbor] = distance[node] + 1;
+				visited[neighbor] = true;
+                q.push(neighbor);
+            }
+        }
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------
 
 int main() {
     int n = 6;  // Number of nodes
