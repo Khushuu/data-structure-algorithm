@@ -22,6 +22,23 @@
 // Keep track of the parent node to avoid counting the immediate previous node as a cycle.
 // If we encounter a visited node that is not the parent, a cycle is detected.
 
+// NOTE:
+// Why Do We Need the Parent in Cycle Detection for an Undirected Graph?
+// When we traverse an undirected graph using DFS, we move from a node to its neighbor.
+// Since the graph is undirected, every edge is bi-directional.
+// If we only check for visited[node], we might incorrectly detect a cycle.
+
+// 🔹 Why Does This Happen?
+
+// Consider a simple graph:
+//    1 -- 2
+
+// DFS starts at node 1 and visits node 2.
+// Now, node 2 sees that node 1 is already visited.
+// If we don’t track the parent, we might incorrectly detect a cycle.
+// ✅ Correct Condition: A cycle exists only if a visited node is not the parent of the current node.
+
+
 // Undirected Graph → Use DFS with parent tracking.
 // Directed Graph (DFS) → Use recursion stack tracking.
 // Directed Graph (BFS - Kahn’s Algorithm) → Use Topological Sorting.
@@ -128,5 +145,59 @@ public:
         return false;
     }
 };
+
+//----------------------------------------------------------------------------------------------
+
+// PRINT ANY CYCLE IN AN UNDIRECTED GRAPH
+// FOR DIRECTED GRAPH - the scc itself is the cycle - so print scc
+
+// steps 
+// in each dfs pass the parent of the node 
+// mark the node as visited and push the node in a stack
+// when a back edge is encountered i.e node is already visited and caller is not the parent 
+// that means there is a cycle 
+// push this node that is the start of the cycle again in the stack
+// return from the dfs call 
+
+// keep popping from the stack until the top element of the stack is not the same as the start node of cycle
+// push it into result and return
+
+// as we print any one cycle - as soon as result is encountered pause dfs execution and return 
+//----------------------------------------------------------------------------------------------
+
+stack<int> stk;
+vector<bool> visited(n, false);
+vector<vector<int>> graph(n);
+
+bool dfs(int node, int parent) {
+
+    visited[node] = true;
+    stk.push(node);
+
+    for(int neighbor: graph[node]) {
+
+        if(!visited[neighbor]) {
+            if(dfs(neighbor, node)) return true;
+        } 
+        else if(neighbor != parent) {// presence of backedge
+            stk.push(neighbor);
+            return true;
+        }
+    }
+    
+    stk.pop();
+    return false;
+}
+
+// cycle printing
+int start = stk.top();
+stk.pop();
+
+while(stk.top() != start) {
+    result.push_back(stk.top());
+    stk.pop();
+}
+
+return result;
 
 //----------------------------------------------------------------------------------------------
