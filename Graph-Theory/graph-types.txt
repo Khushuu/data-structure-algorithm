@@ -1,0 +1,205 @@
+Graphs are fundamental data structures in computer science, used to represent networks, relationships, and connections. 
+They consist of nodes (vertices) and edges (connections between nodes). There are several types of graphs, classified based on their properties.
+
+1️⃣ Based on Edge Direction
+
+1.1 Undirected Graph
+Edges have no direction (i.e., if an edge exists between A and B, you can travel both ways).
+
+Example:
+
+  A -- B
+  |    |
+  C -- D
+
+Representation: Adjacency List or Adjacency Matrix.
+Applications: Social Networks, Road Networks.
+
+
+1.2 Directed Graph (Digraph)
+Edges have a direction (i.e., if an edge exists from A to B, you can only go from A → B, not B → A).
+
+Example:
+
+  A → B
+  ↑    ↓
+  C ← D
+
+Representation: Adjacency List with Direction.
+Applications: Web Crawling, Task Scheduling.
+
+2️⃣ Based on Edge Weight
+
+2.1 Unweighted Graph
+All edges have equal weight (or no weights at all).
+
+Example:
+
+  A -- B
+  |    |
+  C -- D
+
+Applications: Social Networks, Friend Recommendations.
+
+2.2 Weighted Graph
+Edges have weights (costs) associated with them.
+
+Example:
+
+  A --(4)-- B
+  |         |
+ (2)       (7)
+  |         |
+  C --(3)-- D
+
+Applications: Shortest Path Algorithms (Dijkstra’s Algorithm, Bellman-Ford Algorithm).
+
+3️⃣ Based on Cycles
+
+3.1 Acyclic Graph
+No cycles (closed loops) exist.
+
+Example:
+
+  A → B → C
+  ↓
+  D
+
+Applications: Dependency Graphs, Scheduling.
+
+3.2 Cyclic Graph
+Contains at least one cycle.
+
+Example:
+
+  A → B → C
+  ↑       ↓
+  E ← D
+
+Applications: Deadlock Detection, Network Routing.
+
+
+4️⃣ Based on Connectivity
+
+4.1 Connected Graph
+There is a path between every pair of nodes.
+
+Example:
+
+  A -- B
+  |    |
+  C -- D
+Applications: Communication Networks.
+
+4.2 Disconnected Graph
+Not all nodes are reachable from each other.
+
+Example:
+
+  A -- B    C -- D
+
+Applications: Isolated Networks, Clustering.
+
+
+5️⃣ Based on Bipartiteness
+
+5.1 Bipartite Graph
+Nodes can be divided into two sets such that no two nodes in the same set are adjacent.
+
+Example:
+
+  Set1: A, C
+  Set2: B, D
+    A -- B
+    |    |
+    C -- D
+
+Applications: Matching Problems, Graph Coloring.
+
+5.2 Non-Bipartite Graph
+Cannot be divided into two sets as described above.
+
+Example:
+
+  A -- B -- C
+   \      /
+     D
+Applications: Complex Network Structures.
+
+
+6️⃣ Based on Special Properties
+
+6.1 Complete Graph (Kn)
+Every pair of nodes is directly connected by an edge.
+
+Example (K4):
+
+    A -- B
+   / \  / \
+  C -- D
+Applications: Network Design, Clique Detection.
+
+6.2 Tree (Acyclic Connected Graph)
+A special type of graph with N-1 edges and no cycles.
+
+Example:
+
+      A
+     / \
+    B   C
+   / \
+  D   E
+
+Applications: File System Hierarchies, Decision Trees.
+
+6.3 Forest (Collection of Trees)
+A set of multiple trees (disconnected acyclic graphs).
+
+Example:
+
+    A       D
+   / \     /
+  B   C   E
+
+Applications: MST Algorithms (Kruskal’s Algorithm).
+
+6.4 Planar Graph
+Can be drawn on a plane without any edges crossing.
+
+Example:
+
+    A -- B
+   /      \
+  C ------ D
+
+Applications: Geographic Mapping, Circuit Design.
+
+6.5 Eulerian Graph
+A graph where you can traverse each edge exactly once and return to the starting node.
+
+Eulerian Circuit: Exists if all vertices have even degrees.
+Eulerian Path: Exists if exactly two vertices have odd degrees.
+Applications: Chinese Postman Problem, Route Optimization.
+
+6.6 Hamiltonian Graph
+A graph where you can visit each vertex exactly once in a cycle.
+Applications: Traveling Salesman Problem (TSP).
+
+
+🔹 Summary of Graph Types
+Type						Definition
+Directed (Digraph)			Edges have directions.
+Undirected					Edges have no directions.
+Weighted					Edges have associated weights.
+Unweighted					Edges have no weights.
+Acyclic						No cycles present.
+Cyclic						Contains at least one cycle.
+Connected					All nodes can be reached from any node.
+Disconnected				Some nodes are isolated.
+Bipartite					Nodes can be divided into two groups with no intra-group edges.
+Complete (Kn)				Every node connects to every other node.
+Tree						A connected acyclic graph.
+Forest						A collection of trees.
+Planar						Can be drawn without edge crossings.
+Eulerian					A graph that can be traversed using each edge once.
+Hamiltonian					A graph that can be traversed visiting each node once.
