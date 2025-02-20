@@ -79,7 +79,7 @@ public:
             steps++;
         }
         
-        return -1; // Should never reach here
+        return -1; // Should never reach here - the knight can always reach every cell from any source
     }
 };
 
