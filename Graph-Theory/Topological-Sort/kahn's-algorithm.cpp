@@ -3,6 +3,17 @@
 // is a linear ordering of vertices such that for every directed edge (u → v), 
 // vertex u appears before vertex v in the ordering.
 
+// topological sort only applicable in directed graphs
+// undirected graphs won't have any order of execution
+// not unique - all nodes with indegree = 0 at any stage can be shuffled
+
+// NOTE:
+// we don't need visited array here to track visited nodes
+// y --> ? bcoz visited node is needed in case of graph which can have cycles to not visit same node again
+// a cyclic graph will never have a valid toplogical sort 
+// also cyclic nodes will never be traversed or pushed in q as there inDegree will never be 0
+// all nodes in a cycle will have indegree > 0 as they r all dependent on each other 
+
 // 🔹 Applications:
 
 // Task scheduling (e.g., course prerequisites)
@@ -108,72 +119,7 @@ int main() {
     }
     return 0;
 }
-
 // ------------------------------------------------------------------------------------------------------------
-
-// 2️⃣ Using DFS (Recursive)
-// Use DFS and push nodes onto a stack after all their neighbors have been visited.
-// the node which is dependent on others will be pushed first and then the calling parent
-// Reverse the stack to get the topological order.
-
-// ✅ Time Complexity: O(n + E)
-// ✅ Space Complexity: O(n + E) (for adjacency list + recursion stack)
-
-//--------------------------------------------------------------------------------------------------------------
-
-void dfs(int node, vector<vector<int>> &graph, vector<bool> &visited, stack<int> &st) {
-
-    visited[node] = true;
-
-    for (int neighbor : graph[node]) {
-        if (!visited[neighbor]) {
-            dfs(neighbor, graph, visited, st);
-        }
-    }
-
-    st.push(node);  // Push the node after visiting all neighbors
-}
-
-vector<int> topologicalSort(int n, vector<vector<int>> &graph) {
-
-    vector<bool> visited(n, false);
-    stack<int> st;
-    vector<int> result;
-
-	// all connected components have to be handled
-    for (int i = 0; i < n; i++) {
-        if (!visited[i]) {
-            dfs(i, graph, visited, st);
-        }
-    }
-
-    while (!st.empty()) {
-        result.push_back(st.top());
-        st.pop();
-    }
-
-    return result;
-}
-
-int main() {
-    int n = 6;
-    vector<vector<int>> graph(n);
-
-    graph[5].push_back(2);
-    graph[5].push_back(0);
-    graph[4].push_back(0);
-    graph[4].push_back(1);
-    graph[2].push_back(3);
-    graph[3].push_back(1);
-
-    vector<int> result = topologicalSort(n, graph);
-
-    for (int node : result) {
-        cout << node << " ";
-    }
-    return 0;
-}
-//--------------------------------------------------------------------------------------------------------------
 
 // NOTE: 
 // If the graph contains a cycle, topological sorting is not possible
@@ -190,7 +136,7 @@ int main() {
 // 🔹 Changes in Both Methods to Handle Cycles
 // If the graph is not a DAG (Directed Acyclic Graph):
 
-// Kahn’s Algorithm (BFS)
+// Kahn’s Algorithm (BFS) - cyclic graph
 // If there is a cycle, some nodes will never have their in-degree reduced to 0,
 // and the queue will not process all nodes.
 // The number of nodes processed will be less than the total number of nodes n.
@@ -243,58 +189,3 @@ vector<int> topologicalSort(int n, vector<vector<int>> &graph) {
 }
 //--------------------------------------------------------------------------------------------------------------
 
-// DFS-Based Approach
-// If a node is visited again in the same recursion stack, it means there is a back edge, indicating a cycle.
-// Solution: Maintain a recursion stack (onStack[]) to detect cycles.
-
-// ✅ Uses an onStack[] array to Detect Back Edges (Cycle Detection)
-// ✅ Returns false if a Cycle Exists, Otherwise Returns the Topological Order
-
-//--------------------------------------------------------------------------------------------------------------
-
-bool dfs(int node, vector<vector<int>> &graph, vector<bool> &visited, vector<bool> &onStack, stack<int> &st) {
-
-    visited[node] = true;
-    onStack[node] = true;  // Mark node as in current DFS path
-
-    for (int neighbor : graph[node]) {
-
-        if (!visited[neighbor]) {
-            if (!dfs(neighbor, graph, visited, onStack, st)) {
-                return false;  // Cycle found
-            }
-        } else if (onStack[neighbor]) {
-            return false;  // Cycle detected
-        }
-    }
-
-    onStack[node] = false;  // Remove from recursion stack
-    st.push(node);  // Push only if it's part of a DAG
-    return true;
-}
-
-vector<int> topologicalSort(int n, vector<vector<int>> &graph) {
-
-    vector<bool> visited(n, false);
-    vector<bool> onStack(n, false); // Track nodes in recursion stack
-    stack<int> st;
-    vector<int> result;
-
-    for (int i = 0; i < n; i++) {
-        if (!visited[i]) {
-            if (!dfs(i, graph, visited, onStack, st)) {
-                cout << "Cycle detected! Topological sorting is not possible." << endl;
-                return {};  // Return empty if a cycle is detected
-            }
-        }
-    }
-
-    while (!st.empty()) {
-        result.push_back(st.top());
-        st.pop();
-    }
-
-    return result;
-}
-
-//--------------------------------------------------------------------------------------------------------------
