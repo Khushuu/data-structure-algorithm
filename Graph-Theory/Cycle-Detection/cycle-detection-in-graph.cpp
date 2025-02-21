@@ -91,13 +91,71 @@ public:
 };
 //----------------------------------------------------------------------------------------------
 
+// BFS - cycle detection undirected graph
+
+// Start BFS from an unvisited node.
+// Keep a queue storing {node, parent} pairs.
+// Mark nodes as visited when pushing them into the queue.
+// If we find a visited neighbor that is NOT the parent, we have a cycle.
+
+//----------------------------------------------------------------------------------------------
+
+class Solution {
+public:
+    bool bfs(int start, vector<vector<int>>& graph, vector<bool>& visited) {
+
+        queue<pair<int, int>> q;  // {node, parent}
+        q.push({start, -1});
+        visited[start] = true;
+
+        while (!q.empty()) {
+
+            int node = q.front().first;
+            int parent = q.front().second;
+            q.pop();
+
+            for (int neighbor : graph[node]) {
+                if (!visited[neighbor]) {
+                    visited[neighbor] = true;
+                    q.push({neighbor, node});
+                } 
+                else if (neighbor != parent) {
+                    return true; // Cycle detected
+                }
+            }
+        }
+        return false;
+    }
+
+    bool hasCycle(int n, vector<vector<int>>& edges) {
+        vector<vector<int>> graph(n);
+        for (auto& edge : edges) {
+            graph[edge[0]].push_back(edge[1]);
+            graph[edge[1]].push_back(edge[0]); // Since it's an undirected graph
+        }
+
+        vector<bool> visited(n, false);
+
+        // check all components 
+        for (int i = 0; i < n; i++) {
+            if (!visited[i]) {
+                if (bfs(i, graph, visited)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+};
+//----------------------------------------------------------------------------------------------
+
 // Cycle Detection in a Directed Graph
 
 // Approach: Using DFS with Recursion Stack
 
 // Maintain two arrays:
 // visited[] → To mark visited nodes.
-// recStack[] → To track nodes in the current DFS path.
+// inStack[] → To track nodes in the current DFS path.
 // If we revisit a node already in the recursion stack, a cycle is found.
 
 // Time Complexity: O(N + E) → DFS processes each node and edge once.
@@ -105,21 +163,21 @@ public:
 //----------------------------------------------------------------------------------------------
 class Solution {
 private:
-    bool dfs(int node, vector<vector<int>>& graph, vector<bool>& visited, vector<bool>& recStack) {
+    bool dfs(int node, vector<vector<int>>& graph, vector<bool>& visited, vector<bool>& inStack) {
 
         visited[node] = true;
-        recStack[node] = true;
+        inStack[node] = true;
 
         for (int neighbor : graph[node]) {
             if (!visited[neighbor]) {
-                if (dfs(neighbor, graph, visited, recStack)) return true;
+                if (dfs(neighbor, graph, visited, inStack)) return true;
             } 
-            else if (recStack[neighbor]) { // If node is already in recursion stack, cycle found
+            else if (inStack[neighbor]) { // If node is already in recursion stack, cycle found
                 return true;
             }
         }
 
-        recStack[node] = false; // Remove from recursion stack when backtracking
+        inStack[node] = false; // Remove from recursion stack when backtracking
         return false;
     }
 
@@ -128,7 +186,7 @@ public:
 
         vector<vector<int>> graph(n);
         vector<bool> visited(n, false);
-        vector<bool> recStack(n, false);
+        vector<bool> inStack(n, false);
 
         // Build adjacency list
         for (auto& edge : edges) {
@@ -138,7 +196,7 @@ public:
         // Check for cycles in all components
         for (int i = 0; i < n; i++) {
             if (!visited[i]) {
-                if (dfs(i, graph, visited, recStack)) return true;
+                if (dfs(i, graph, visited, inStack)) return true;
             }
         }
 
@@ -147,6 +205,10 @@ public:
 };
 
 //----------------------------------------------------------------------------------------------
+
+// BFS - cycle detection in directed graph
+// Topological sort - Use Kahn's algorithm 
+
 
 // PRINT ANY CYCLE IN AN UNDIRECTED GRAPH
 // FOR DIRECTED GRAPH - the scc itself is the cycle - so print scc
