@@ -21,6 +21,7 @@ private:
     vector<int> dc = {0, 0, -1, 1};
 
     void dfs(int r, int c, vector<vector<bool>>& visited, vector<vector<char>>& grid) {
+		
         visited[r][c] = true;
 
         // Explore 4 directions
