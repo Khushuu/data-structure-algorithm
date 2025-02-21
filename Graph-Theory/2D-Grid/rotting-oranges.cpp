@@ -1,4 +1,5 @@
 // 994. Rotting Oranges
+// Multi-source BFS problem
 
 // 0 - empty cell
 // 1 - fresh orange
