@@ -35,7 +35,7 @@
 
 // Dijkstra's algorithm doesn't work with negative weight edges because it assumes that once a node's shortest distance is finalized (processed), it will never be updated. This assumption is violated when negative weight edges exist.
 
-D// ijkstra's Limitation: It assumes that once a node's shortest distance is finalized, it will not change.
+// Dijkstra's Limitation: It assumes that once a node's shortest distance is finalized, it will not change.
 //Negative Weight Edges: Violate this assumption as a shorter path might appear after finalizing a node.
 // Alternative: Use the Bellman-Ford Algorithm for graphs with negative weight edges.
 
@@ -59,14 +59,17 @@ void dijkstra(int source, vector<vector<pair<int, int>>>& graph) {
 
     while (!minHeap.empty()) {
 
-        int d = minHeap.top().first; // distance from the node 
-        int u = minHeap.top().second; // neighbor node
+        int d = minHeap.top().first; // distance from the source node
+        int node = minHeap.top().second; // node
+        // int u = minHeap.top().second; // node
         minHeap.pop();
 
-		// if the distance in the minHeap for the node is greater than distance stored in array
+		// if the distance in the minHeap for the node(from source node) is greater than distance stored in array
 		// then do not go with the relaxation step
 		// as it can never minimize the distance 
-        if (d > dist[u]) continue; 
+
+        if (d > dist[node]) continue; 
+        // if (d > dist[u]) continue; 
 
 		// loop over all the connected nodes of u
 		// if a node v connected to u --> has dist[v] > dist[u] + weight of edge connecting u and v
@@ -80,11 +83,23 @@ void dijkstra(int source, vector<vector<pair<int, int>>>& graph) {
 		// it is possible that one or more copy of the node and distance are there in minHeap
 		// but always the smallest distance is picked and each node is processed just once
 		// hence push the new distance and the node to u
-        for (auto& edge : graph[u]) {
-            int v = edge.first, weight = edge.second;
-            if (dist[u] + weight < dist[v]) {
-                dist[v] = dist[u] + weight;
-                minHeap.push({dist[v], v});
+
+        // for (auto& edge : graph[u]) {
+        //     int v = edge.first, weight = edge.second;
+        //     if (dist[u] + weight < dist[v]) {
+        //         dist[v] = dist[u] + weight;
+        //         minHeap.push({dist[v], v});
+        //     }
+        // }
+
+        for (auto& edge : graph[node]) {
+            
+            int neighbor = edge.first, weight = edge.second;
+            int newDistance = dist[node] + weight;
+
+            if (newDistance < dist[neighbor]) {
+                dist[neighbor] = newDistance;
+                minHeap.push({dist[neighbor], neighbor});
             }
         }
     }

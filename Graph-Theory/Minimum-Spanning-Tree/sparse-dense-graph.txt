@@ -1,0 +1,36 @@
+1. Sparse Graph
+A sparse graph has very few edges compared to the maximum possible edges.
+
+Characteristics:
+✅ Few edges → E≈O(V)
+✅ Adjacency List is preferred (memory-efficient)
+✅ Common in real-world applications (e.g., road networks, social networks)
+✅ MST algorithms like Kruskal’s work efficiently
+
+Example of a Sparse Graph (V=6,E=5):
+
+   0 -- 1
+   |    
+   2    3 -- 4 -- 5
+
+👉 Maximum possible edges for 6 vertices: V(V−1)/2=15
+👉 Actual edges: 5 (much smaller than 15) → Sparse Graph
+
+
+2. Dense Graph
+A dense graph has many edges, close to the maximum possible edges.
+
+Characteristics:
+✅ Many edges → E≈O(V^2)
+✅ Adjacency Matrix is preferred (fast edge lookup but uses more space)
+✅ Used in complete or near-complete graphs
+✅ Prim’s Algorithm works well (using an adjacency matrix)
+
+Example of a Dense Graph (V=6,E=14):
+
+   0 -- 1 -- 2
+   |  \/ |  /
+   3 -- 4 -- 5
+
+👉 Maximum possible edges: 15
+👉 Actual edges: 14 (almost full) → Dense Graph

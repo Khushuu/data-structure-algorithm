@@ -10,3 +10,7 @@ Shortest path
 
 -- All source shortest path
 	-- weighted --> -ve weights ==> floyd warshall algorithm -- T.C = O(v^3)
+
+
+-- BFS doesn't work for weighted graph as it considers all edges as same
+-- without any consideration to the weight attached to the edge 
