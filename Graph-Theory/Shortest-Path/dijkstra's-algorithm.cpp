@@ -39,6 +39,12 @@
 //Negative Weight Edges: Violate this assumption as a shorter path might appear after finalizing a node.
 // Alternative: Use the Bellman-Ford Algorithm for graphs with negative weight edges.
 
+// Dijkstra's algorithm fails for a cycle with negative weights
+// y
+// as it will keep reducing the distance reachable for nodes in the cycle again and again
+// each time it will insert min distance of node from source and try to minimize distance of its neighbor
+// and this will keep going on endlessly
+
 // T.C = O((V + E).logV)
 // S.C = O(V + E) with adjacency list
 
@@ -93,7 +99,7 @@ void dijkstra(int source, vector<vector<pair<int, int>>>& graph) {
         // }
 
         for (auto& edge : graph[node]) {
-            
+
             int neighbor = edge.first, weight = edge.second;
             int newDistance = dist[node] + weight;
 
