@@ -1,4 +1,13 @@
-// SHORTEST PATH ALGORITHM
+// SHORTEST PATH ALGORITHM - DIJKSTRA's algoirthm
+
+// it is a greedy algorithm
+// as it always picks the neighbor edge of the node with the least weight
+// this is done using a min heap - priority queue of pair of weight, node 
+// The priority queue ensures that the node with the shortest known distance is always processed first.
+// For each node that is extracted from the priority queue, its neighbors are checked. 
+// If traveling through the current node provides a shorter path to a neighboring node, the shortest time to that node is updated, and the neighbor is added to the priority queue for further processing. 
+// This continues until all nodes have been processed, at which point the shortest time to each node is known.
+
 
 // given a weighted graph (directed / undirected)
 // and a source node
@@ -45,8 +54,16 @@
 // each time it will insert min distance of node from source and try to minimize distance of its neighbor
 // and this will keep going on endlessly
 
+// Time complexity: O((N+E)logN)
+
+// Constructing the adjacency list requires iterating over all E edges, taking O(E) time. Dijkstra's algorithm, implemented using a priority queue, processes each node at most once, and each edge is relaxed once. Since inserting and extracting from a priority queue takes O(logN) time, the total complexity of Dijkstra’s traversal is O((N+E)logN).
+
+// The inner loop of Dijkstra's algorithm iterates over all neighboring edges of the current node. Since each edge is processed only when it is relaxed, it results in an overall complexity of O(ElogN). Combining the adjacency list construction and Dijkstra’s algorithm, the total time complexity remains O((N+E)logN).
+
+
 // T.C = O((V + E).logV)
 // S.C = O(V + E) with adjacency list
+// he total space used is dominated by O(N+E) for storing the graph, the overall space complexity is O(N+E).t
 
 const int INF = numeric_limits<int>::max();
 

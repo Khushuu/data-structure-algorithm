@@ -3,6 +3,11 @@
 // find no. of ways you can travel from intersection 0 to intersection n - 1 in the shortest amount of time.
 // Return the number of ways you can arrive at your destination in the shortest amount of time. Since the answer may be large, return it modulo 109 + 7.
 
+// Let N be the number of nodes in the graph and E be the number of edges in the given road connections.
+// Time complexity: O((N+E)logN)'
+// Space complexity: O(N+E)
+// the total space used is dominated by O(N+E) for storing the graph, the overall space complexity is O(N+E).
+
 class Solution {
 public:
     int countPaths(int n, vector<vector<int>>& roads) {

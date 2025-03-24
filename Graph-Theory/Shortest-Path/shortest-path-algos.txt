@@ -5,7 +5,7 @@ Shortest path
 
 -- Single source shortest path 
 	-- unweighted --> bfs -- T.C = O(v + e)
-	-- weighted --> +ve weights ==> dijkstra's algorithm -- T.C = O(e * log v)
+	-- weighted --> +ve weights ==> dijkstra's algorithm -- T.C = O(e * log v) - greedy algorithm
 	-- weighted --> -ve weights ==> bellman ford algorithm -- T.C = O(v * e)
 
 -- All source shortest path
