@@ -19,6 +19,12 @@
 // low[v] > in[u]
 // i.e low[child] > in[node]
 
+// 1192. Critical Connections in a Network
+// optimization
+// u can use in time to identify if a node is visited or not
+// intialize it with -1 and if a node is not visited its value will be -1
+// remove using visited array then
+
 // code
 // --------------------------------------------------------------------------------------------------
 
