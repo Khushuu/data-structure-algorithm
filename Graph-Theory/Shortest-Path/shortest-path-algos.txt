@@ -14,3 +14,9 @@ Shortest path
 
 -- BFS doesn't work for weighted graph as it considers all edges as same
 -- without any consideration to the weight attached to the edge 
+
+
+DIJKSTRA SAMPLE PROBLEMS:
+
+	743. Network Delay Time
+	1631. Path With Minimum Effort - on 2d grid

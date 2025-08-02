@@ -1,3 +1,6 @@
+// To find bridges in a graph (also known as cut-edges)
+// we use a DFS-based algorithm known as Tarjan’s Algorithm for bridges.
+
 // back-edge: edge connecting a node to its ancestor which is not its direct parent
 // presence of back-edge means there is cycle in the graph
 

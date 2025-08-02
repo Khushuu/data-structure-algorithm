@@ -8,6 +8,8 @@
 // If traveling through the current node provides a shorter path to a neighboring node, the shortest time to that node is updated, and the neighbor is added to the priority queue for further processing. 
 // This continues until all nodes have been processed, at which point the shortest time to each node is known.
 
+// Sample leetcode problem: 
+// 743. Network Delay Time: https://leetcode.com/problems/network-delay-time/description/
 
 // given a weighted graph (directed / undirected)
 // and a source node
@@ -41,6 +43,15 @@
 // Limitations:
 // Does not work with graphs containing negative weight edges (use Bellman-Ford instead)
 // Not ideal for unweighted graphs (use BFS for shortest path)
+
+// The Key Insight
+// The critical point is that Dijkstra can work with negative edges as long as:
+
+    // No negative cycles exist
+    // The priority queue processes nodes in order of current shortest distance
+    // The statement in your comment might be too absolute. A more accurate statement would be:
+
+// "Standard Dijkstra's algorithm is designed for non-negative weights and may not guarantee optimal results with negative edges in all implementations, though some implementations can handle negative edges without negative cycles."
 
 // Dijkstra's algorithm doesn't work with negative weight edges because it assumes that once a node's shortest distance is finalized (processed), it will never be updated. This assumption is violated when negative weight edges exist.
 
@@ -82,17 +93,18 @@ void dijkstra(int source, vector<vector<pair<int, int>>>& graph) {
 
     while (!minHeap.empty()) {
 
-        int d = minHeap.top().first; // distance from the source node
-        int node = minHeap.top().second; // node
-        // int u = minHeap.top().second; // node
+        // int d = minHeap.top().first; // distance from the source node
+        // int node = minHeap.top().second; // node
+        auto [d, u] = minHeap.top(); // distance, node
         minHeap.pop();
 
 		// if the distance in the minHeap for the node(from source node) is greater than distance stored in array
 		// then do not go with the relaxation step
 		// as it can never minimize the distance 
-
-        if (d > dist[node]) continue; 
-        // if (d > dist[u]) continue; 
+        
+        // if the heap has stale data u do not need to look over the neighbors of that node 
+        // if (d > dist[node]) continue; 
+        if (d > dist[u]) continue; 
 
 		// loop over all the connected nodes of u
 		// if a node v connected to u --> has dist[v] > dist[u] + weight of edge connecting u and v
@@ -107,24 +119,24 @@ void dijkstra(int source, vector<vector<pair<int, int>>>& graph) {
 		// but always the smallest distance is picked and each node is processed just once
 		// hence push the new distance and the node to u
 
-        // for (auto& edge : graph[u]) {
-        //     int v = edge.first, weight = edge.second;
-        //     if (dist[u] + weight < dist[v]) {
-        //         dist[v] = dist[u] + weight;
-        //         minHeap.push({dist[v], v});
-        //     }
-        // }
-
-        for (auto& edge : graph[node]) {
-
-            int neighbor = edge.first, weight = edge.second;
-            int newDistance = dist[node] + weight;
-
-            if (newDistance < dist[neighbor]) {
-                dist[neighbor] = newDistance;
-                minHeap.push({dist[neighbor], neighbor});
+        for (auto& [v, weight] : graph[u]) {
+            if (dist[u] + weight < dist[v]) {
+                dist[v] = dist[u] + weight;
+                minHeap.push({dist[v], v});
             }
         }
+
+        // for(auto &[v, w]: graph[node])
+        // for (auto& edge : graph[node]) {
+
+        //     int neighbor = edge.first, weight = edge.second;
+        //     int newDistance = dist[node] + weight;
+
+        //     if (newDistance < dist[neighbor]) {
+        //         dist[neighbor] = newDistance;
+        //         minHeap.push({dist[neighbor], neighbor});
+        //     }
+        // }
     }
 
     for (int i = 0; i < n; i++) {
@@ -150,3 +162,4 @@ int main() {
 
     return 0;
 }
+
