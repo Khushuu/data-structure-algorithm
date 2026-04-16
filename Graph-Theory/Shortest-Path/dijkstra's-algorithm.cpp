@@ -45,6 +45,11 @@
 // Not ideal for unweighted graphs (use BFS for shortest path)
 
 // The Key Insight
+
+// Negative weight cycle --> a cycle whose net sum of weights is negative --> will never work with Dijkstra's algorithm
+// as dijkstra's will never stop processing such graph with negative weight cycles --> every time it will find min path to a node
+// and will keep reducing the distance reachable for nodes in the cycle again and again
+
 // The critical point is that Dijkstra can work with negative edges as long as:
 
     // No negative cycles exist

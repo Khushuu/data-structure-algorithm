@@ -1,0 +1,59 @@
+# DSU - Disjoint Set Union
+
+USED IN:
+
+-- Cycle detection in undirected graph 
+-- Minimum Spanning Tree(MST) - Kruskal's algorithm --> based on DSU 
+
+-- when questions asks to do some work related to groups 
+-- or grouping 
+
+-- forms disjoint groups 
+-- the groups are unconnected and unrelated 
+-- criteria of grouping might be different everytime --> necessarily not based on edges 
+
+# Parts of DSU
+
+-- parent array: tracks the parent of each node 
+-- Find() method: recursive method to find the parent of a node 
+-- Union() method: links two nodes together: makes parent of one node child of other node 
+
+-- Find method: Path Compression (for optimization)
+-- Union method: Union By Rank (for optimization)
+
+-------------------------------------------------------------------------------------------------------------------
+
+# Find() method: 
+  -- can have Path Compression technique --> instead of forming a tree structure each node stores there parent 
+  -- otherwise u will have to follow the chain link to identify the parent each time 
+
+e.g:
+
+# Path Compression: optimizes the find method 
+
+Without path compression technique:
+A <-- B <-- C <-- D [to find the parent of node D --> u will have to recursively track the parent of C then B then A]
+
+With path compression structure updates to:
+A <-- B, A <-- C, A <-- D [u can just look up parent of D then A to find the parent instead of following a chain]
+
+-------------------------------------------------------------------------------------------------------------------
+
+# Union() method:
+
+
+# Union by rank 
+
+-- each node will have a rank assigned to it -- denoting number of children nodes
+-- when merging parents --> make the node with more rank (children) as parent 
+-- use ranking to merge the nodes 
+
+-------------------------------------------------------------------------------------------------------------------
+
+# Pattern
+
+-- find node belongs to which group in efficient manner 
+
+-------------------------------------------------------------------------------------------------------------------
+
+
