@@ -1,233 +1,276 @@
-## Reverse sort methods in c++
 
-# using greater function
--- sort(v.begin(), v.end(), std::greater<int>())
+# C++ Syntax Cheatsheet
 
-# using reverse iterators
--- sort(v.rbegin(), v.rend()) **clean**
+## Reverse sort methods in C++
 
-# using custom sort - lambda function
+### Using `std::greater`
+```cpp
+sort(v.begin(), v.end(), std::greater<int>());
+```
 
+### Using reverse iterators (clean)
+```cpp
+sort(v.rbegin(), v.rend());
+```
+
+### Using custom sort — lambda
+```cpp
 std::sort(v.begin(), v.end(), [](int a, int b) {
-    return a > b;  // descending order
+    return a > b; // descending order
 });
+```
 
-# for vector of pairs 
-
+### For vector of pairs
+```cpp
 std::sort(v.begin(), v.end(), [](auto &a, auto &b) {
     return a.first > b.first;
 });
+```
 
--------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------
 
-## Queue - FIFO - First In First Out
+## Queue — FIFO (First In First Out)
 
+Include and declaration:
+
+```cpp
 #include <queue>
-queue<int> q;
+std::queue<int> q;
+```
 
-Front --> 1 2 3 4 <-- Back
+Diagram: Front --> 1 2 3 4 <-- Back
 
-# operations:
+### Operations
 
-1. push() - inserts an element to the back of the queue 
-    - q.push(1)
-    - T.C: O(1)
+1. `push()` — inserts an element to the back of the queue
 
-2. pop() - removes the first element from the queue
-    - q.pop();
-    - T.C: O(1)
-    - does not return the removed value 
-    - Front --> 1 2 3 <-- Back
+```cpp
+q.push(1);
+```
 
-3. front() - returns the first element of the queue
-    - q.front()
-    - T.C: O(1)
-    # C++ Syntax Cheatsheet
+Time complexity: O(1)
 
-    ## Reverse sort methods in C++
+2. `pop()` — removes the first element from the queue (does not return it)
 
-    ### Using `std::greater`
-    ```cpp
-    sort(v.begin(), v.end(), std::greater<int>());
-    ```
+```cpp
+q.pop();
+```
 
-    ### Using reverse iterators (clean)
-    ```cpp
-    sort(v.rbegin(), v.rend());
-    ```
+Time complexity: O(1)
 
-    ### Using custom sort — lambda
-    ```cpp
-    std::sort(v.begin(), v.end(), [](int a, int b) {
-        return a > b; // descending order
-    });
-    ```
+3. `front()` — returns the first element
 
-    ### For vector of pairs
-    ```cpp
-    std::sort(v.begin(), v.end(), [](auto &a, auto &b) {
-        return a.first > b.first;
-    });
-    ```
+```cpp
+q.front();
+```
 
-    ---
+Time complexity: O(1)
 
-    ## Queue — FIFO (First In First Out)
+4. `back()` — returns the last element
 
-    Include and declaration:
+```cpp
+q.back();
+```
 
-    ```cpp
-    #include <queue>
-    std::queue<int> q;
-    ```
+Time complexity: O(1)
 
-    Diagram: Front --> 1 2 3 4 <-- Back
+5. `empty()` — checks if the queue is empty
 
-    ### Operations
+```cpp
+q.empty();
+```
 
-    1. `push()` — inserts an element to the back of the queue
+Time complexity: O(1)
 
-    ```cpp
-    q.push(1);
-    ```
+6. `size()` — returns number of elements
 
-    Time complexity: O(1)
+```cpp
+q.size();
+```
 
-    2. `pop()` — removes the first element from the queue (does not return it)
+Time complexity: O(1)
 
-    ```cpp
+### Traversal example
+
+```cpp
+while (!q.empty()) {
+    std::cout << q.front() << " ";
     q.pop();
-    ```
+}
+```
 
-    Time complexity: O(1)
+--------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------
 
-    3. `front()` — returns the first element
+## Hashmap — `std::unordered_map`
 
-    ```cpp
-    q.front();
-    ```
+Stores key-value pairs using a hash table; unordered (not sorted).
 
-    Time complexity: O(1)
+Include and declaration:
 
-    4. `back()` — returns the last element
+```cpp
+#include <unordered_map>
+std::unordered_map<int, std::string> mp;
+```
 
-    ```cpp
-    q.back();
-    ```
+### Insertion
 
-    Time complexity: O(1)
+Method 1 — using `operator[]` (may create default value if key absent)
 
-    5. `empty()` — checks if the queue is empty
+```cpp
+mp[1] = 10;
+mp[2] = 20;
+```
 
-    ```cpp
-    q.empty();
-    ```
+Time complexity: average O(1)
 
-    Time complexity: O(1)
+Method 2 — using `insert`
 
-    6. `size()` — returns number of elements
+```cpp
+mp.insert({3, 30});
+// or
+mp.insert(std::make_pair(3, 30));
+```
 
-    ```cpp
-    q.size();
-    ```
+### Access
 
-    Time complexity: O(1)
+```cpp
+std::cout << mp[1]; // prints 10
+```
 
-    ### Traversal example
+Note: `mp[100]` will insert `100` with a default value if it doesn't exist.
 
-    ```cpp
-    while (!q.empty()) {
-        std::cout << q.front() << " ";
-        q.pop();
-    }
-    ```
+### Search — `find()`
 
-    ---
+```cpp
+auto it = mp.find(2);
+if (it != mp.end()) {
+    std::cout << "Found";
+    std::cout << it->first;  // key
+    std::cout << it->second; // value
+}
+```
 
-    ## Hashmap — `std::unordered_map`
+Time complexity: average O(1)
 
-    Stores key-value pairs using a hash table; unordered (not sorted).
+### Check existence — `count()`
 
-    Include and declaration:
+```cpp
+if (mp.count(5)) {
+    std::cout << "Exists";
+}
+```
 
-    ```cpp
-    #include <unordered_map>
-    std::unordered_map<int, std::string> mp;
-    ```
+Returns `1` if present, `0` if absent. Average complexity O(1).
 
-    ### Insertion
+### Deletion
 
-    Method 1 — using `operator[]` (may create default value if key absent)
+Erase by key:
 
-    ```cpp
-    mp[1] = 10;
-    mp[2] = 20;
-    ```
+```cpp
+mp.erase(2);
+```
 
-    Time complexity: average O(1)
+Erase by iterator:
 
-    Method 2 — using `insert`
+```cpp
+auto it = mp.find(2);
+if (it != mp.end()) mp.erase(it);
+```
 
-    ```cpp
-    mp.insert({3, 30});
-    // or
-    mp.insert(std::make_pair(3, 30));
-    ```
+Average complexity: O(1)
 
-    ### Access
+### Size / Empty / Clear
 
-    ```cpp
-    std::cout << mp[1]; // prints 10
-    ```
+```cpp
+mp.size();   // average O(1)
+mp.empty();  // average O(1)
+mp.clear();  // O(n) // cleares everything
+```
 
-    Note: `mp[100]` will insert `100` with a default value if it doesn't exist.
+### Traversing 
 
-    ### Search — `find()`
+# Method 1: Range-Based Loop (Most Common)
 
-    ```cpp
-    auto it = mp.find(2);
-    if (it != mp.end()) {
-        std::cout << "Found";
-        std::cout << it->first;  // key
-        std::cout << it->second; // value
-    }
-    ```
+```cpp
+for(auto &p : mp)
+{
+    cout << p.first << " "
+         << p.second << endl;
+}
+```
 
-    Time complexity: average O(1)
+# Complexity: O(n)
 
-    ### Check existence — `count()`
+# Method 2: Iterator
 
-    ```cpp
-    if (mp.count(5)) {
-        std::cout << "Exists";
-    }
-    ```
+```cpp
+for(auto it = mp.begin();
+    it != mp.end();
+    ++it)
+{
+    cout << it->first << " "
+         << it->second << endl;
+}
+```
+# Complexity: O(n)
 
-    Returns `1` if present, `0` if absent. Average complexity O(1).
+# Method 3: Structured Bindings (C++17)
 
-    ### Deletion
+Very clean.
 
-    Erase by key:
+```cpp
+// what i prefer
 
-    ```cpp
-    mp.erase(2);
-    ```
+for(auto &[key, value] : mp)
+{
+    cout << key << " "
+         << value << endl;
+}
+```
+# Complexity: O(n)
 
-    Erase by iterator:
+### IMPORTANT
 
-    ```cpp
-    auto it = mp.find(2);
-    if (it != mp.end()) mp.erase(it);
-    ```
+```cpp
 
-    Average complexity: O(1)
+mp[key]++
+mp[key]--
+mp.find(key)
+mp.count(key)
+mp.erase(key)
 
-    ### Size / Empty / Clear
+for(auto &[k,v] : mp)
 
-    ```cpp
-    mp.size();   // average O(1)
-    mp.empty();  // average O(1)
-    mp.clear();  // O(n)
-    ```
+```
 
-    ---
+--------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------
+
+
+// MIN and MAX element 
+
+```cpp
+// Returns iterators to the elements.
+
+vector<int> v = {10, 5, 20, 8, 15};
+
+int minElement = *min_element(v.begin(), v.end());
+int maxElement = *max_element(v.begin(), v.end());
+
+
+// min max element in a single pass
+auto p = minmax_element(v.begin(), v.end());
+
+cout << "Minimum element: " << *p.first << endl;
+cout << "Maximum element: " << *p.second << endl;
+
+// For arrays
+
+int arr[] = {4, 2, 9, 1, 7};
+
+int mx = *max_element(arr, arr + 5);
+int mn = *min_element(arr, arr + 5);
+
+```
