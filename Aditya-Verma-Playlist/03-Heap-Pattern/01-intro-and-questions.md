@@ -32,11 +32,25 @@
 - kth smallest element
 - return k largest elements
 
-- **sort a k sorted array** - sort nearly sorted array - **Important**
+- sort a k sorted array - sort nearly sorted array 
 
-- k closest numbers 
-- top k frequent numbers 
-- frequency sort 
+- **k closest numbers** - **Important** - save pair of abs difference and num in maxheap
+- **top k frequent numbers** - **Important** - save pair of freq of each number in minHeap 
+- **frequency sort** - **VV Important**
+
 - k closest points to origin
 - connect ropes to minimize the cost 
 - sum of elements between k1 smallest and k2 smallest numbers 
+
+####################################################################################################################
+
+# This is the pattern used in many heap problems such as:
+
+* K Closest Numbers
+* K Closest Points to Origin
+* Top K Frequent Elements
+* Frequency Sort
+* Merge K Sorted Lists
+* Kth Largest Element
+
+where custom ordering is needed.
