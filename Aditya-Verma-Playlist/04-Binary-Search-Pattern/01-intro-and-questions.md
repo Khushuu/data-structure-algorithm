@@ -6,9 +6,9 @@
 # Questions
 
 - Order agnostic Binary Search
-- First and Last occurence of an element
+- **First and Last occurence of an element** - **Important**
 - Count of element in a sorted array
-- **Number of times array is rotated** - **Important**
+- **Number of times array is rotated** - **VV Important**
 - **Find an element in rotated sorted array** - **Important**
 - Searching in nearly sorted array
 - Floor/Ceil of an element
