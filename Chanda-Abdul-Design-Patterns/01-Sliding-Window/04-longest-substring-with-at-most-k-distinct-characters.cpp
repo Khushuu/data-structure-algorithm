@@ -39,33 +39,34 @@
 // S.C = O(k)
 
 class Solution {
-    public:
-        int lengthOfLongestSubstringKDistinct(string s, int k) {
+public:
+    int lengthOfLongestSubstringKDistinct(string s, int k) {
 
-            int l = 0;
-            int r = 0;
-            unordered_map<char, int> freq;
-            int result = 0;
+        int l = 0;
+        int r = 0;
+        unordered_map<char, int> freq;
+        int result = 0;
 
-            while (r < s.size()) {
+        while (r < s.size()) {
 
-                freq[s[r]]++;
+            freq[s[r]]++; // add to the window
 
-                while (freq.size() > k) {
+            while (freq.size() > k) {
 
-                    freq[s[l]]--;
+                freq[s[l]]--;
 
-                    if (freq[s[l]] == 0)
-                        freq.erase(s[l]);
+                if (freq[s[l]] == 0)
+                    freq.erase(s[l]);
 
-                    l++;
-                }
-
-                result = max(result, r - l + 1);
-
-                r++;
+                l++;
             }
 
-            return result;
+            // deduce result
+            result = max(result, r - l + 1);
+
+            r++;
         }
+
+        return result;
+    }
 };
