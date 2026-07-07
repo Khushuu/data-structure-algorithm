@@ -1,22 +1,22 @@
-Here is how we use **In-Time** and **Out-Time** in a **Directed Graph**.
+// Here is how we use **In-Time** and **Out-Time** in a **Directed Graph**.
 
-In a directed graph, tracking these times allows us to classify every single edge into one of four categories: 
-**Tree Edges**, 
-**Back Edges**,
-**Forward Edges**, or 
-**Cross Edges**. 
+// In a directed graph, tracking these times allows us to classify every single edge into one of four categories: 
+// **Tree Edges**, 
+// **Back Edges**,
+// **Forward Edges**, or 
+// **Cross Edges**. 
 
-This classification is the foundation for detecting cycles and finding topological sorts.
+// This classification is the foundation for detecting cycles and finding topological sorts.
 
-----------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------
 
-## 1. C++ Implementation for a Directed Graph
+// ## 1. C++ Implementation for a Directed Graph
 
-We will use an additional `visited` state array (or a recursion stack array) to track whether a node is currently being explored.
+// We will use an additional `visited` state array (or a recursion stack array) to track whether a node is currently being explored.
 
-* `0`: Unvisited
-* `1`: Visiting (In-time has been recorded, but not Out-time)
-* `2`: Fully Processed (Out-time has been recorded)
+// * `0`: Unvisited
+// * `1`: Visiting (In-time has been recorded, but not Out-time)
+// * `2`: Fully Processed (Out-time has been recorded)
 
 #include <iostream>
 #include <vector>
@@ -84,47 +84,53 @@ int main() {
     return 0;
 }
 
-----------------------------------------------------------------------------------------------------------------
-----------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------
 
 
-## 2. Explanation of Edge Classifications
+// ## 2. Explanation of Edge Classifications
 
-When moving along a directed edge from node `u` to node `v` ($u \rightarrow v$), comparing their timestamps tells us exactly how they relate structurally:
+// When moving along a directed edge from node `u` to node `v` ($u \rightarrow v$), comparing their timestamps tells us exactly how they relate structurally:
 
-----------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------
 
-### 1. Tree Edge
+// ### 1. Tree Edge
 
-* **What it is:** The edge leading to an unvisited node (`visited[v] == 0`). This edge becomes part of our DFS tree.
-* **Timing:** $v$ is discovered after $u$, so `in[u] < in[v]`.
+// * **What it is:** The edge leading to an unvisited node (`visited[v] == 0`). This edge becomes part of our DFS tree.
+// * **Timing:** $v$ is discovered after $u$, so `in[u] < in[v]`.
 
-----------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------
 
-### 2. Back Edge 🚨
+// ### 2. Back Edge 🚨
 
-* **What it is:** An edge pointing from a node to one of its ancestors still residing in the active recursion stack (`visited[v] == 1`).
-* **Significance:** **The presence of even a single back edge means the graph contains a cycle.**
-* **Timing:** Since $v$ is an ancestor, it was discovered before $u$, but hasn't finished yet: `in[v] < in[u]` and `out[v]` hasn't been set.
+// * **What it is:** An edge pointing from a node to one of its ancestors still residing in the active recursion stack (`visited[v] == 1`).
+// * **Significance:** **The presence of even a single back edge means the graph contains a cycle.**
+// * **Timing:** Since $v$ is an ancestor, it was discovered before $u$, but hasn't finished yet: `in[v] < in[u]` and `out[v]` hasn't been set.
 
-----------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------
 
-### 3. Forward Edge
+// ### 3. Forward Edge
 
-* **What it is:** An edge pointing from an ancestor to a deeply nested descendant that has already been completely evaluated (`visited[v] == 2`).
-* **Timing:** Because $v$ is a descendant, it was discovered after $u$. Therefore: `in[u] < in[v]`.
+// a back edge points from a descendant to an ancestor 
+// a forward edge points from an ancestor to a descendant
 
+// * **What it is:** An edge pointing from an ancestor to a deeply nested descendant that has already been completely evaluated (`visited[v] == 2`).
+// * **Timing:** Because $v$ is a descendant, it was discovered after $u$. Therefore: `in[u] < in[v]`.
 
+// ----------------------------------------------------------------------------------------------------------------
 
-### 4. Cross Edge
+// ### 4. Cross Edge
 
-* **What it is:** An edge pointing between two branches of the DFS tree where neither node is an ancestor of the other (`visited[v] == 2`).
-* **Timing:** Because $v$ was in an entirely different, previously explored branch, it was discovered and completed before $u$ was ever reached. Therefore: `in[v] < in[u]`.
+// a cross edge connects two connected components
+// where one of the connected components is completly discovered before the other
 
-----------------------------------------------------------------------------------------------------------------
-----------------------------------------------------------------------------------------------------------------
+// * **What it is:** An edge pointing between two branches of the DFS tree where neither node is an ancestor of the other (`visited[v] == 2`).
+// * **Timing:** Because $v$ was in an entirely different, previously explored branch, it was discovered and completed before $u$ was ever reached. Therefore: `in[v] < in[u]`.
 
-## 3. Complexity Analysis
+// ----------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------
 
-* **Time Complexity:** $\mathcal{O}(V + E)$ where $V$ is vertices and $E$ is edges. Every node and edge is processed a constant number of times.
-* **Space Complexity:** $\mathcal{O}(V)$ due to the size of the mapping arrays (`in_time`, `out_time`, `visited`) and the maximum possible depth of the recursive call stack.
+// ## 3. Complexity Analysis
+
+// * **Time Complexity:** {O}(V + E)$ where $V$ is vertices and $E$ is edges. Every node and edge is processed a constant number of times.
+// * **Space Complexity:** {O}(V)$ due to the size of the mapping arrays (`in_time`, `out_time`, `visited`) and the maximum possible depth of the recursive call stack.
