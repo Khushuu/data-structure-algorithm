@@ -1,3 +1,20 @@
+## Overview
+
+1. Introduction to Disjoint set DS
+2. Disjoint set implementation
+
+3. Runtime improvement techniques
+    --> Union by Rank
+    --> Path Compression
+
+4. Implementation of Disjoint set to:
+    --> Detect cycle in a graph 
+    --> Find number of connected components
+    --> Find Minimum Spanning Tree (MST)
+
+-------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------
+
 # DSU - Disjoint Set Union
 
 USED IN:
