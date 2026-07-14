@@ -14,18 +14,10 @@
 // also cyclic nodes will never be traversed or pushed in q as there inDegree will never be 0
 // all nodes in a cycle will have indegree > 0 as they r all dependent on each other 
 
-// 🔹 Applications:
-
-// Task scheduling (e.g., course prerequisites)
-// Dependency resolution (e.g., package installations)
-// Compiler optimizations (e.g., instruction ordering)
-
-// 🔹 Related LeetCode Problems
-// LeetCode 207 - Course Schedule 🏫 (Check if a DAG is valid)
-// LeetCode 210 - Course Schedule II 🏫 (Find a valid topological order)
-// LeetCode 329 - Longest Increasing Path in a Matrix 📈 (DAG + Topological Sort)
-// LeetCode 1462 - Course Schedule IV 🏫 (Reachability in a DAG)
-// LeetCode 1203 - Sort Items by Groups Respecting Dependencies 🔄 (Topological Sort with constraints)
+// none of the nodes belonging to a cycle will be part of topological sort
+// 1->2->3->1 cycle - here indegree of all nodes will be > 0 i.e inDegree = 1
+// since all nodes are dependent on each other 
+// we can never find a valid topological sort where the one that is not dependent on any node should come first
 
 // 🔹 Methods to Find Topological Sorting
 // Kahn's algorithm - BFS - Use this cleaner and better 
@@ -188,4 +180,17 @@ vector<int> topologicalSort(int n, vector<vector<int>> &graph) {
     return result;
 }
 //--------------------------------------------------------------------------------------------------------------
+
+// 🔹 Applications:
+
+// Task scheduling (e.g., course prerequisites)
+// Dependency resolution (e.g., package installations)
+// Compiler optimizations (e.g., instruction ordering)
+
+// 🔹 Related LeetCode Problems
+// LeetCode 207 - Course Schedule 🏫 (Check if a DAG is valid)
+// LeetCode 210 - Course Schedule II 🏫 (Find a valid topological order)
+// LeetCode 329 - Longest Increasing Path in a Matrix 📈 (DAG + Topological Sort)
+// LeetCode 1462 - Course Schedule IV 🏫 (Reachability in a DAG)
+// LeetCode 1203 - Sort Items by Groups Respecting Dependencies 🔄 (Topological Sort with constraints)
 
