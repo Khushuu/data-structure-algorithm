@@ -8,19 +8,29 @@
 // transposed graph - edge direction is reversed if graph has edge from a->b 
 // transposed graph will have edge from b->a
 
-// no. of strongly connected components in graph and transposed will be the same 
+// no. of strongly connected components in graph and transposed graph are same 
+
+//----------------------------------------------------------------------------------------------------------
 
 // CONDENSATION GRAPH 
 
 // using scc of the original graph 
+// what it means?
+// each scc in the original graph acts as a vertex in condensation graph - 
+// so the combine set of vertex in scc will be a single vertex in condensation graph
 // each scc acts as a vertex in condensation graph 
 // ther is an edge between scc_1 and scc_2 vertext in condensation graph 
 // if there exists a vertext u in scc_1 and another vertex v in scc_2 such that there is an edge betwee u and v
 
+//----------------------------------------------------------------------------------------------------------
+
+// NOTE:
 // condensation graph does not contain any cycle 
 // y --> because if there was a cycle in between the connected components acting as vertex in condensation graph
 // --> then that summation of vertex will itself be a connected component
 // --> which is a contradiction to the initial claim that we have each vertex as a different connected component 
+
+//----------------------------------------------------------------------------------------------------------
 
 // out time of each scc and their relation 
 
@@ -36,18 +46,50 @@
 // --> so we traverse all nodes in C_b first and then move on to the next connected component
 // --> in both cases outTime[C_a] > outTime[C_b]
 
+//----------------------------------------------------------------------------------------------------------
 
+// condensation graph is directed acyclic graph
 // --> directed acyclic graph has atleast one node with inDegree = 0
+
 // --> y --> because if the inDegree was > 1 for all that means all nodes are connected and have a cycle
 // --> which means it is not a directed acyclic graph 
+
+//----------------------------------------------------------------------------------------------------------
+
+// PURPOSE OF THIS:
+
+// We want to ensure that when we visit an scc in the condensation graph, we only traverse the scc nodes
+// and not the nodes belonging to other sccs
+// this is only possible if we pick the scc nodes that have inDegree == 0
+// keep picking the scc with indegree == 0 and move on to the next scc
+
+//----------------------------------------------------------------------------------------------------------
 
 // --> no condensation graph is directed acyclic graph
 // --> each strongly connected component is a vertex
 // --> there lies edge connecting these components
 // --> there will be atleast 1 strongly connected component with inDegree of 0 
 
+// NOTE:
 // --> a vertex in condensation graph having inDegree == 0 will have outDegree == 0 in transposed graph
 // --> as the direction of all edges is reversed in the transposed graph 
+
+// IMPORTANCE OF 0 OUTDEGREE:
+// once a dfs call is made to an scc in condensation graph with outdegree == 0
+// no further dfs call from this scc node will happen to another scc node as the outdegree of this scc is 0
+
+//----------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------
+
+// IMPORTATNT POINTS
+
+// 1. Graph and Transposed Graph have the same number of strongly connected components (scc)
+// 2. Condensation graph combines the scc into a single vertex
+// 3. Condensation graph is directed acyclic graph
+// 4. outTime[C_a] > outTime[C_b] if there is an edge from C_a --> C_b
+
+//----------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------
 
 
 // Kosaraju's Algorithm - Strongly Connected Components (SCC)

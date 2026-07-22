@@ -35,9 +35,7 @@ A Strongly Connected Component (SCC) in a directed graph is a maximal subset of 
 
 ✅ Example:
 
-css
-Copy
-Edit
+
   A → B
   ↑   ↓
   D ← C
